@@ -1,0 +1,40 @@
+name: Build GenIA OS
+
+on:
+  workflow_dispatch: # Permite disparar manualmente o build
+  push:
+    branches:
+      - master # Roda sempre que houver mudança na master
+
+env:
+  # --- COLOQUE SEU REPOSITORIO DO DOCKER HUB ABAIXO ---
+  IMAGE_NAME: carloshaugusto/chat
+  # Exemplo: carlosgenia/chatwoot
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          # Usa o Dockerfile oficial que já vem no código
+          file: ./docker/Dockerfile 
+          push: true
+          # Cria duas tags: 'latest' e 'v1'
+          tags: ${{ env.IMAGE_NAME }}:latest, ${{ env.IMAGE_NAME }}:v1
+          cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:cache
+          cache-to: type=registry,ref=${{ env.IMAGE_NAME }}:cache,mode=max
