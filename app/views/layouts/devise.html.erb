@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GenIA OS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=0"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <style>
+      :root {
+        --color-brand: #DB58F4 !important;
+        --w-500: #DB58F4 !important;
+        --w-600: #6514BE !important;
+        --s-900: #04034F !important;
+        --b-50:  #04034F !important;
+      }
+      html, body, #app, .app-wrapper, .auth-wrap, .login-page {
+        background-color: #04034F !important;
+        background-image: none !important;
+        color: #ffffff;
+        height: 100vh;
+        margin: 0;
+      }
+      body { display: flex; flex-direction: column; justify-content: center; }
+      .app-wrapper .sidebar, aside.sidebar, .sidebar-wrap { 
+        background-color: var(--s-900) !important;
+        border-right: 1px solid rgba(255,255,255,0.1) !important;
+      }
+      .auth-box, .login-box, .card, .medium-12.columns {
+        background-color: #ffffff !important;
+        border-radius: 12px !important;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important;
+        padding: 40px !important;
+        color: #04034F !important;
+        max-width: 450px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .auth-box h1, .auth-box h2, .auth-box label, .auth-box p, .auth-box a, h1, h2, h3, label { color: #04034F !important; }
+      .button, button, .submit-button, input[type="submit"] { 
+        background-color: #DB58F4 !important;
+        border: 1px solid #DB58F4 !important; 
+        color: #ffffff !important;
+        width: 100%;
+        border-radius: 6px;
+        padding: 10px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .button:hover, button:hover, input[type="submit"]:hover { background-color: #6514BE !important; }
+      a, .link, .text-link { color: #DB58F4 !important; }
+      .chatwoot-branding, .branding--link, .footer-links, .logo { display: none !important; }
+    </style>
+  </head>
+  <body class="text-slate-600">
+    <div id="app"></div>
+    <div class="auth-wrap" style="width: 100%; display: flex; justify-content: center;">
+        <%= yield %>
+    </div>
+  </body>
+</html>
